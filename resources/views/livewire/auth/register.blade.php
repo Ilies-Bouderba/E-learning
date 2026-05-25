@@ -1,5 +1,3 @@
-{{-- resources/views/livewire/auth/register.blade.php --}}
-
 <div class="auth-page">
 
     <div class="auth-left">
@@ -114,22 +112,6 @@
                 </button>
 
             </form>
-
-            <div class="auth-divider">
-                <span>or continue with</span>
-            </div>
-
-            <div class="auth-socials">
-
-                <button type="button" class="social-btn">
-                    Google
-                </button>
-
-                <button type="button" class="social-btn">
-                    GitHub
-                </button>
-
-            </div>
 
         </div>
     </div>

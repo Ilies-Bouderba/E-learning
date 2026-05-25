@@ -4,20 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Consolidated exam migration.
- *
- * Replaces the original 5 fragmented migrations:
- *   - 2026_03_25_110429_exam.php                         (initial exams table)
- *   - 2026_05_16_100304_add_missing_columns_to_exams_table.php
- *   - 2026_05_16_100918_create_exam_questions_table.php
- *   - 2026_05_16_100936_add_start_end_dates_to_exams_table.php
- *   - 2026_05_16_101534_drop_scheduled_date_from_exams_table.php
- *   - 2026_05_16_101639_create_exam_attempts_table.php
- *
- * The final schema has: exams, exam_questions, exam_attempts.
- * `scheduled_date` is intentionally omitted (it was added then immediately dropped).
- */
+
 return new class extends Migration
 {
     public function up(): void
@@ -46,7 +33,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // NO CASCADE on exam_id – SQL Server disallows multiple cascade paths
         Schema::create('exam_attempts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');

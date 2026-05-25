@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Exam;
 use App\Models\ExamAttempt;
 use App\Services\AIGradingService;
+use App\Notifications\ExamGradedNotification;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -120,6 +121,9 @@ class Take extends Component
 
         $maxScore   = $this->exam->total_score;
         $percentage = $maxScore > 0 ? round(($totalScore / $maxScore) * 100) : 0;
+
+        $this->attempt->load('exam.course');
+        auth()->user()->notify(new ExamGradedNotification($this->attempt));
 
         session()->flash('success', "Exam submitted! Your score: {$percentage}%");
         return redirect()->route('cours.show', $this->course);

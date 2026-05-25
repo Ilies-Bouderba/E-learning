@@ -5,7 +5,6 @@
         <div class="create-course-page">
             <div class="container" style="max-width: 100%; padding: 0;">
                 <div class="cc-header" style="margin-bottom: 2rem;">
-                    {{-- FIXED: use teacher.quizzes.index instead of quizzes.index --}}
                     <a href="{{ route('teacher.quizzes.index', $course) }}" class="cc-back">← Back to Quizzes</a>
                     <div>
                         <span class="section-tag">{{ $course->icon }} {{ $course->title }}</span>

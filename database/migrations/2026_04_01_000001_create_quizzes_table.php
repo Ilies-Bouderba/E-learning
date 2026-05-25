@@ -35,7 +35,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // NO CASCADE on quiz_id – avoids multiple cascade paths through course
         Schema::create('quiz_attempts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');

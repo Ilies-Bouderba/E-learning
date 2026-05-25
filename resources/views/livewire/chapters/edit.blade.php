@@ -35,7 +35,6 @@
                         @enderror
                     </div>
 
-                    {{-- Existing Attachments Section --}}
                     <div class="cc-field">
                         <label class="cc-label">Existing Attachments</label>
                         <div class="attachments-container" style="display: flex; flex-direction: column; gap: 1rem;">
@@ -63,7 +62,6 @@
                         </div>
                     </div>
 
-                    {{-- Add New Attachment Section --}}
                     <div class="cc-field">
                         <label class="cc-label">Add New Attachment</label>
                         <div class="new-attachment-card"

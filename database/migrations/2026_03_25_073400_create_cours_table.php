@@ -4,11 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Creates: cours, announcements, enrollments.
- * NOTE: The original migration also created a `comments` table that was never
- * used in the application (chapter_comments replaced it). That table is omitted.
- */
+
 return new class extends Migration
 {
     public function up(): void
@@ -33,7 +29,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // NO CASCADE on course_id to avoid multiple SQL Server cascade paths
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');

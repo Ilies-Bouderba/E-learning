@@ -45,7 +45,6 @@
                         @enderror
                     </div>
 
-                    {{-- Attachments Section --}}
                     <div class="cc-field">
                         <label class="cc-label">Attachments (optional)</label>
                         <div class="attachments-container" style="display: flex; flex-direction: column; gap: 1.5rem;">

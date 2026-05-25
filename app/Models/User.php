@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     protected $fillable = ['name', 'email', 'password', 'role'];
@@ -33,7 +32,6 @@ class User extends Authenticatable
 
     // ── Relationships ─────────────────────────────────────────────────────────
 
-    /** Courses this teacher owns */
     public function courses()
     {
         return $this->hasMany(Course::class, 'teacher_id');
@@ -51,7 +49,6 @@ class User extends Authenticatable
 
     // ── Business logic ────────────────────────────────────────────────────────
 
-    /** Returns 0-100 progress percentage for a given course */
     public function courseProgress(int $courseId): int
     {
         $total     = Chapter::where('course_id', $courseId)->count();
@@ -63,7 +60,6 @@ class User extends Authenticatable
         return $total > 0 ? (int) round(($completed / $total) * 100) : 0;
     }
 
-    /** Returns quiz status array for a given quiz */
     public function quizProgress(int $quizId): array
     {
         $attempt = QuizAttempt::where('student_id', $this->id)

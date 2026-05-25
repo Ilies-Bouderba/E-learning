@@ -134,9 +134,9 @@
                         <h2 class="dash-card-title">Statistics</h2>
                     </div>
                     <div style="padding: 0.5rem 0;">
-                        <p><strong>Total Attempts:</strong> {{ collect($studentAttempts)->count() }}</p>
-                        <p><strong>Average Score:</strong> {{ round(collect($studentAttempts)->avg('total_score'), 1) }} / {{ $exam->total_score }}</p>
-                        <p><strong>Highest Score:</strong> {{ round(collect($studentAttempts)->max('total_score'), 1) }} / {{ $exam->total_score }}</p>
+                        <p><strong>Total Attempts:</strong> {{ $studentAttempts->count() }}</p>
+                        <p><strong>Average Score:</strong> {{ round($studentAttempts->avg('total_score'), 1) }} / {{ $exam->total_score }}</p>
+                        <p><strong>Highest Score:</strong> {{ round($studentAttempts->max('total_score'), 1) }} / {{ $exam->total_score }}</p>
                     </div>
                 </div>
             </div>
@@ -148,16 +148,16 @@
                 <div class="students-list">
                     @forelse($studentAttempts as $attempt)
                     <div class="student-item" style="padding: 1rem; border-bottom: 1px solid rgba(15,14,23,0.08);">
-                        <div class="student-avatar">{{ strtoupper(substr($attempt['student']['name'] ?? 'UN', 0, 2)) }}</div>
+                        <div class="student-avatar">{{ strtoupper(substr($attempt->student->name, 0, 2)) }}</div>
                         <div class="student-info">
-                            <div class="student-name">{{ $attempt['student']['name'] ?? 'Unknown' }}</div>
-                            <div class="student-course">{{ $attempt['student']['email'] ?? '' }}</div>
+                            <div class="student-name">{{ $attempt->student->name }}</div>
+                            <div class="student-course">{{ $attempt->student->email }}</div>
                         </div>
                         <div class="student-progress">
-                            @if($attempt['completed_at'])
-                                @if($attempt['is_graded'])
+                            @if($attempt->completed_at)
+                                @if($attempt->is_graded)
                                     <span class="badge" style="background: #10b981; color: white;">Graded</span>
-                                    <span class="student-pct" style="margin-left: 0.5rem;">{{ $attempt['total_score'] }}/{{ $exam->total_score }}</span>
+                                    <span class="student-pct" style="margin-left: 0.5rem;">{{ $attempt->total_score }}/{{ $exam->total_score }}</span>
                                 @else
                                     <span class="badge" style="background: #f59e0b;">Pending</span>
                                 @endif

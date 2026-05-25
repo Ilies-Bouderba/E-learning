@@ -89,7 +89,6 @@
                             <a href="{{ route('chapters.show', ['course' => $course, 'chapter' => $chapter]) }}" class="btn-sm">View →</a>
                             @if(auth()->user()->isTeacher() && $course->teacher_id == auth()->id())
                                 <a href="{{ route('teacher.chapters.edit', ['course' => $course, 'chapter' => $chapter]) }}" class="btn-sm">Edit</a>
-
                                 <button class="btn-sm btn-danger" wire:click="deleteChapter({{ $chapter->id }})" wire:confirm="Delete this chapter?">Delete</button>
                             @endif
                         </div>
@@ -183,18 +182,16 @@
                 </div>
                 <div class="exam-list">
                     @php
+                        // Get published exams for students, all exams for teachers
                         if(auth()->user()->isTeacher() && $course->teacher_id == auth()->id()) {
                             $exams = $course->exams()->latest()->take(3)->get();
                         } else {
+                            // For students, only show exams that are NOT closed (available or upcoming)
                             $exams = $course->exams()
                                 ->where('is_published', true)
                                 ->where(function($q) {
                                     $q->whereNull('end_date')
-                                    ->orWhere('end_date', '>=', now())
-                                    ->orWhereHas('attempts', function($a) {
-                                        $a->where('student_id', auth()->id())
-                                            ->whereNotNull('completed_at');
-                                    });
+                                      ->orWhere('end_date', '>=', now());
                                 })
                                 ->latest()
                                 ->take(3)

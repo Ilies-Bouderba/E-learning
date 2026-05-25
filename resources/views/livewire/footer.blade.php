@@ -7,7 +7,6 @@ new class extends Component {
 };
 ?>
 
-{{-- ========== FOOTER ========== --}}
 <footer class="footer">
     <div class="container footer-inner">
         <div class="footer-brand">

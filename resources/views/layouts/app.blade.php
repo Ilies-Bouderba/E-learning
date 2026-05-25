@@ -22,17 +22,14 @@
 <body>
 
     <livewire:nav />
-    {{-- ========== MAIN ========== --}}
     <main>
         {{ $slot }}
     </main>
 
     <livewire:footer />
 
-    {{-- Livewire scripts --}}
     @livewireScripts
 
-    {{-- Mobile nav toggle --}}
     <script>
         const burger = document.getElementById('navBurger');
         const mobile = document.getElementById('navMobile');

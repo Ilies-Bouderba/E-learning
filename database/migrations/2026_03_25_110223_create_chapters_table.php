@@ -21,7 +21,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chapter_id')->constrained('chapters')->onDelete('cascade');
             $table->string('title');
-            $table->string('type', 20)->default('pdf'); // string not enum – SQL Server compatible
+            $table->string('type', 20)->default('pdf');
             $table->string('file_path');
             $table->timestamps();
         });

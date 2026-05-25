@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * Renamed from Cour → Course for clarity.
- * The underlying table stays 'cours' to avoid a migration change.
- */
+
 class Course extends Model
 {
     use HasFactory;

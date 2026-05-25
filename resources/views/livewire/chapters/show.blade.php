@@ -327,12 +327,12 @@
                             <div class="comment-user">
 
                                 <div class="comment-avatar">
-                                    {{ strtoupper(substr($comment->author->name ?? 'U', 0, 2)) }}
+                                    {{ strtoupper(substr($comment->student->name, 0, 2)) }}
                                 </div>
 
                                 <div>
                                     <div class="comment-name">
-                                        {{ $comment->author->name ?? 'Unknown' }}
+                                        {{ $comment->student->name }}
                                     </div>
 
                                     <div class="comment-date">
@@ -418,13 +418,13 @@
                                             <div class="comment-user">
 
                                                 <div class="reply-avatar">
-                                                    {{ strtoupper(substr($reply->author->name ?? 'U', 0, 2)) }}
+                                                    {{ strtoupper(substr($reply->student->name, 0, 2)) }}
                                                 </div>
 
                                                 <div>
 
                                                     <div class="comment-name">
-                                                        {{ $reply->author->name ?? 'Unknown' }}
+                                                        {{ $reply->student->name }}
                                                     </div>
 
                                                     <div class="comment-date">

@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role', 20)->default('student'); // string instead of enum for SQL Server
+            $table->string('role', 20)->default('student');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,7 +1,4 @@
-{{-- resources/views/livewire/home.blade.php --}}
-
 <section>
-    {{-- ========== HERO ========== --}}
     <section class="hero">
         <div class="container">
             <div class="hero-inner">
@@ -72,7 +69,6 @@
         </div>
     </section>
 
-    {{-- ========== MARQUEE TICKER ========== --}}
     <div class="ticker-wrap">
         <div class="ticker-track">
             <span class="ticker-item">Courses <span class="ticker-dot">✦</span></span>
@@ -94,7 +90,6 @@
         </div>
     </div>
 
-    {{-- ========== FEATURED COURSES ========== --}}
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -110,7 +105,6 @@
             </div>
     </section>
 
-    {{-- ========== HOW IT WORKS ========== --}}
     <section class="section section-dark">
         <div class="container">
             <div class="section-header">
@@ -148,7 +142,6 @@
         </div>
     </section>
 
-    {{-- ========== ANNOUNCEMENTS ========== --}}
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -202,7 +195,6 @@
         </div>
     </section>
 
-    {{-- ========== CTA BANNER ========== --}}
     <section class="cta-section">
         <div class="container">
             <div class="cta-inner">

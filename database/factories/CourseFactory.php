@@ -7,7 +7,6 @@ use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends Factory<Course> */
 class CourseFactory extends Factory
 {
     protected $model = Course::class;

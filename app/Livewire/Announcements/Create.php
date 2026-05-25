@@ -4,6 +4,8 @@ namespace App\Livewire\Announcements;
 
 use App\Models\Announcement;
 use App\Models\Course;
+use App\Models\User;
+use App\Notifications\NewAnnouncement;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -38,12 +40,18 @@ class Create extends Component
     {
         $this->validate();
 
-        Announcement::create([
+        $announcement = Announcement::create([
             'course_id' => $this->course->id,
             'title'     => $this->title,
             'content'   => $this->content,
             'posted_at' => now(),
         ]);
+
+        $announcement->load('course');
+        $students = User::whereHas('enrollments', fn ($q) => $q->where('course_id', $this->course->id))->get();
+        foreach ($students as $student) {
+            $student->notify(new NewAnnouncement($announcement));
+        }
 
         session()->flash('success', 'Announcement posted successfully.');
         return redirect()->route('cours.show', $this->course);

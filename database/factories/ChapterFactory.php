@@ -6,7 +6,6 @@ use App\Models\Chapter;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends Factory<Chapter> */
 class ChapterFactory extends Factory
 {
     protected $model = Chapter::class;

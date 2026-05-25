@@ -80,7 +80,6 @@ Route::middleware('auth')->group(function () {
 
 // ═══════════════════════════════════════════════════════
 // SHARED — all roles, no role middleware
-// Routes here handle auth internally in the component
 // ═══════════════════════════════════════════════════════
 
 Route::middleware('auth')->group(function () {
@@ -132,7 +131,6 @@ Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')
     Route::get('/cours/create', CourseCreate::class)->name('cours.create');
     Route::get('/cours/{course}/edit', CourseEdit::class)->name('cours.edit');
 
-    // Teacher-prefixed aliases so teacher blade links work
     Route::get('/cours/{course}/chapters/create',           ChapterCreate::class)->name('chapters.create');
     Route::get('/cours/{course}/chapters/{chapter}/edit',   ChapterEdit::class)->name('chapters.edit');
     Route::get('/cours/{course}/announcements/create',      AnnouncementCreate::class)->name('announcements.create');
@@ -157,4 +155,39 @@ Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')
     Route::get('/cours/{course}/exams',                         StudentExamIndex::class)->name('exams.index');
     Route::get('/cours/{course}/exams/{exam}/take',             ExamTake::class)->name('exams.take');
     Route::get('/announcements',                                StudentAnnouncementIndex::class)->name('all-announcements');
+});
+
+// ═══════════════════════════════════════════════════════
+// PASSWORD RESET (admin-mediated flow)
+// ═══════════════════════════════════════════════════════
+Route::get('/forgot-password', \App\Livewire\Auth\ForgotPassword::class)
+    ->middleware('guest')
+    ->name('password.forgot');
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/password-resets', \App\Livewire\Admin\PasswordResets::class)
+        ->name('admin.password-resets');
+});
+
+// ═══════════════════════════════════════════════════════
+// NOTIFICATIONS
+// ═══════════════════════════════════════════════════════
+Route::middleware('auth')->group(function () {
+    Route::post('/notifications/{id}/read', function (string $id) {
+        auth()->user()->notifications()->where('id', $id)->update(['read_at' => now()]);
+        return response()->json(['ok' => true]);
+    })->name('notifications.read');
+
+    Route::post('/notifications/read-all', function () {
+        auth()->user()->unreadNotifications->markAsRead();
+        return response()->json(['ok' => true]);
+    })->name('notifications.read-all');
+});
+
+// ═══════════════════════════════════════════════════════
+// GRADEBOOK & LEADERBOARD
+// ═══════════════════════════════════════════════════════
+Route::middleware('auth')->group(function () {
+    Route::get('/cours/{course}/gradebook',    \App\Livewire\Gradebook\Index::class)->name('gradebook.index');
+    Route::get('/cours/{course}/leaderboard',  \App\Livewire\Gradebook\Leaderboard::class)->name('gradebook.leaderboard');
 });

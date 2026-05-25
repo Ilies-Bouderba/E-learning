@@ -14,7 +14,7 @@ class Show extends Component
     public Course        $course;
     public Quiz          $quiz;
     public               $studentAttempt  = null;
-    public               $studentAttempts = [];
+    public array         $studentAttempts = [];
 
     public function mount(Course $course, Quiz $quiz): mixed
     {
@@ -27,7 +27,7 @@ class Show extends Component
         $this->quiz   = $quiz->load(['questions.options']);
 
         if ($user->isAdmin()) {
-            $this->studentAttempts = $this->quiz->attempts()->with('student')->get();
+            $this->studentAttempts = $this->quiz->attempts()->with('student')->get()->toArray();
             return null;
         }
 

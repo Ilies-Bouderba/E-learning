@@ -3,20 +3,13 @@
         <a href="{{ route('home') }}" class="sidebar-logo">edu<span>me</span>x</a>
         <nav class="sidebar-nav">
             <span class="sidebar-nav-label">Main</span>
-            <a href="{{ route('teacher.dashboard') }}" class="sidebar-link active"><span class="sidebar-icon">🏠</span>
+            <a href="{{ route('teacher.dashboard') }}" class="sidebar-link active"><span class="sidebar-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
                 Dashboard</a>
-            <a href="{{ route('teacher.cours.index') }}" class="sidebar-link"><span class="sidebar-icon">📚</span> My Courses</a>
+            <a href="{{ route('teacher.cours.index') }}" class="sidebar-link"><span class="sidebar-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span> My Courses</a>
             <span class="sidebar-nav-label">Manage</span>
             <a href="{{ route('teacher.cours.create') }}" class="sidebar-link"><span class="sidebar-icon">➕</span> New
                 Course</a>
         </nav>
-        <div class="sidebar-user">
-            <div class="sidebar-avatar sidebar-avatar-teacher">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
-            <div class="sidebar-user-info"><span class="sidebar-user-name">{{ auth()->user()->name }}</span><span
-                    class="sidebar-user-role">Teacher</span></div>
-            <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit" class="sidebar-logout"
-                    title="Logout">↩</button></form>
-        </div>
     </aside>
     <main class="dash-main">
         <div class="dash-header">
@@ -133,11 +126,11 @@
                 <div class="comments-list">
                     @forelse($recentComments as $comment)
                         <div class="comment-item">
-                        <div class="comment-avatar">{{ strtoupper(substr($comment->author->name ?? 'U', 0, 2)) }}</div>
-                        <div class="comment-body">
-                            <div class="comment-course">{{ $comment->chapter->title ?? 'Unknown chapter' }}</div>
+                            <div class="comment-avatar">{{ strtoupper(substr($comment->student->name, 0, 2)) }}</div>
+                            <div class="comment-body">
+                                <div class="comment-course">{{ $comment->course->title }}</div>
                                 <div class="comment-text">{{ Str::limit($comment->comment_text, 90) }}</div>
-                                <div class="comment-date">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'Unknown date' }}</div>
+                                <div class="comment-date">{{ $comment->posted_at ? $comment->posted_at->diffForHumans() : 'Unknown date' }}</div>
                             </div>
                         </div>
                     @empty

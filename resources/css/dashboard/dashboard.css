@@ -814,3 +814,7 @@
         align-items: flex-start;
     }
 }
+-e 
+/* Remove sidebar-user space */
+.sidebar-user { display: none; }
+.sidebar { padding-bottom: 1.5rem; }

@@ -37,7 +37,6 @@ class Manage extends Component
             ->where('teacher_id', auth()->id())
             ->firstOrFail();
 
-        // Delete child records (SQL Server cascades are limited, so we clean up manually)
         foreach ($course->chapters as $chapter) {
             StudentProgress::where('chapter_id', $chapter->id)->delete();
             $chapter->attachments()->delete();

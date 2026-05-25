@@ -23,7 +23,6 @@
                 </div>
             @endif
             <div class="enroll-actions">
-                {{-- FIXED: changed dashboard.student to student.dashboard --}}
                 <a href="{{ route('student.dashboard') }}" class="btn btn-ghost">← Back</a>
                 <button class="btn btn-primary btn-lg" wire:click="enroll">
                     <span wire:loading.remove wire:target="enroll">Enroll Now →</span>
